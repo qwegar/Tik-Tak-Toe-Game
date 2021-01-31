@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tic-Tak-Toe Game</title>
+
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <div id="main">
+        <div id="game">
+
+        </div>
+    </div>
+
+    <script>
+
+        let box;
+        let game = document.querySelector('#game');
+
+        for (let i = 0; i < 9; i++) {
+            let box = document.createElement('div');
+            box.classList.add('pole');
+            box.style.border = '1px solid #fff';
+            box.style.width = '50px';
+            box.style.height = '50px';
+            box.style.float = 'left';
+            box.style.background = 'grey';
+            box.style.color = 'white';
+            box.style.fontSize = '45px';
+            box.style.textAlign = 'center';
+
+            game.style.width = '156px';
+            game.style.margin = '0 auto';
+            game.appendChild(box);
+
+        }
+
+        function zero() {
+            let id = Math.floor(Math.random() * 9);
+            blocks[id] ? zero() : move(id, 'zero');
+        }
+
+        let step = 0;
+        game.addEventListener('click', function () {
+            //console.log(step);
+            if (step % 2 == 0) {
+                event.target.innerHTML = 'X';
+            } else if (step % 2 != 0) {
+                event.target.innerHTML = 'O';
+            }
+            step++;
+            stepIn();
+        })
+
+        let pole = document.querySelectorAll('.pole');
+        blocks = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        function stepIn() {
+
+
+            for (let i = 0; i < blocks.length; i++) {
+                if (pole[blocks[i][0]].innerHTML == 'X' &&
+                    pole[blocks[i][1]].innerHTML == 'X' &&
+                    pole[blocks[i][2]].innerHTML == 'X') {
+                    alert('X WINS!');
+                    location.reload();
+                }
+                else if (pole[blocks[i][0]].innerHTML == 'O' &&
+                    pole[blocks[i][1]].innerHTML == 'O' &&
+                    pole[blocks[i][2]].innerHTML == 'O') {
+                    alert('O WINS!');
+                    location.reload();
+                }
+            }
+        }
+        //stepIn();
+
+    </script>
+</body>
+
+</html>
